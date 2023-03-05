@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+      <head>
+	        <title>Calculadora</title>
+			<meta charset="utf-8">
+			<meta name="author"   content="Robson da Silva">
+			<meta name="keywords" content="miniprojeto,treino,javascript">
+			<meta name="descriptions" content="calculadora usando javascript">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="icon" href="Imagens/calculadora.ico" type="image/x-icon">
+			
+			<style>
+			       
+				   h1{
+				      text-align:center;
+					  text-decoration:underline;
+				   }
+				   
+				   button{
+				     border-radius:4px;
+					 box-shadow:2px #000;
+				     cursor:pointer;
+					 font-weight:bold;
+					 font-size:20px;
+					 padding-right:15px;
+					 padding:20px;
+					 margin-top:10px;
+				   }
+				   
+				   button:active{
+				     transform:scale(0.90);
+				   }
+				   
+				   button:hover{
+				     background-color:#483D8B;
+				   }
+				   
+				   input[type=button]:hover{
+				    cursor:pointer;
+					border-radius:4px;
+					background-color:#B0C4DE;
+				   }
+				   
+				   
+			       #screen{
+					width:235px;
+					height:50px;
+					border:1px solid;
+					background-color:#7FFFD4;
+					font-family:monospace;   
+					font-size:30px;
+					margin-top:50px;
+					margin-left:35px;
+					overflow:auto;
+					padding-top:10px;
+					text-align:center;
+				   }
+				   
+				   #calculator{
+					 border:solid 1px;
+					 border-radius:8px;
+					 box-shadow:3px black;
+					 background-color:black;
+				     margin-left:530px;
+					 margin-right:480px;
+					 width:300px;
+					 height:450px;
+				   }
+				   
+				   #buttons{
+				     margin-left:100px;
+					 margin-top:20px;
+				   }
+				   
+				   #buttons>button{
+				     padding:20px;
+					 margin-top:10px;
+				   }
+				   
+				   
+				   #btgroup1{
+				     margin-left:35px;
+				   }
+				   
+				   #btgroup2{
+				     margin-left:35px;
+				   }
+				   
+				   #btgroup3{
+				     margin-left:35px;
+				   }
+				   
+				   #btgroup4{
+				     display:flex;
+					 flex-direction:column;
+					 align-content:center;
+					 margin-left:210px;
+					 margin-top:-231px;
+					 width:60px;
+				   }
+				   
+				   #btgroup5{
+				     display:flex;
+					 flex-direction:row-reverse;
+					 justify-content:flex-end;
+					 margin-left:15px;
+					 margin-top:-20px;
+					 padding:20px;
+				   }
+				   
+				   #equal{
+				     background-color:#f00;
+					 color:#fff;
+				     padding-left:20px;
+				   }
+				   
+				   #equal:hover{
+                     background-color:tomato;
+				   }
+				   
+				   #equal2{
+				     background-color:#f00;
+					 color:#fff;
+					 display:none;
+				     padding-left:20px;
+				   }
+				   
+				   #ce{
+				     padding:15px;
+				   }
+				   
+				   #btdiv{
+				     padding-left:30px;
+				   }
+				   
+				   
+				   @media only screen and (max-width:600px) and (orientation: portrait){
+				   
+				     h1{
+					   margin-left:20px;
+					 }
+					 
+				     #calculator{
+					   margin-left:auto;
+					   margin-right:auto;
+					   margin-top:-20px;
+					 }
+				   }
+				   
+				   @media only screen and (max-width:960px) and (orientation:landscape){
+				   
+				     h1{
+					   display:none;
+					 }
+					 
+					 button{
+					   padding:10px;
+					 }
+					 
+					 #screen{
+					   display:flex;
+					   align-items:center;
+					   margin-top:20px;
+					   height:30px;
+					   width:85%;
+					 }
+					 
+				     #calculator{
+					   background-color:black;
+					   margin-left:auto;
+					   margin-right:auto;
+					   margin-top:10px;
+					   height:250px;
+					   width:420px;
+					 }
+					 
+					 #btgroup4{
+					   margin-left:150px;
+					   margin-top:-170px;
+					 }
+					 
+					 #btgroup5{
+				       display:flex;
+					   flex-direction:column;
+					   justify-content:center;
+					   align-items:normal;
+					   margin-left:200px;
+					   margin-top:-190px;
+					   width:60px;
+				    }
+					
+					#btgroup5>button{
+					  padding:10px;
+					}
+					
+					#equal{
+					  display:none;
+					}
+					
+					#equal2{
+					  display:flex;
+					  justify-content:flex-end;
+					  align-items:center;
+					  margin-top:-180px;
+					  margin-left:290px;
+					  height:160px;
+					  padding-left:80px;
+					}
+					
+					#equal2:hover{
+                     background-color:tomato;
+				    }
+				}
+				
+				@media only screen and (max-width:1200px) and (orietation:portrait){
+					 h1{
+					   margin-left:20px;
+					 }
+					 
+				     #calculator{
+					   background-color:green;
+					   margin-left:auto;
+					   margin-right:auto;
+					   margin-top:-20px;
+					 }
+			    }
+				   
+		    </style>
+			
+	  </head>
+	  
+	  
+	  <body>
+	        <h1>Calculadora</h1>
+			
+			<div id="calculator">
+			      <div id="screen"></div>
+				      <div id="btgroup1">
+				           <button id="bt1" value="1" onclick="NumberOne()">1</button>
+				           <button id="bt2" value="2" onclick="NumberTwo()">2</button>
+				           <button id="bt3" value="3" onclick="NumberThree()">3</button>
+					  </div>
+					  <div id="btgroup2">
+					       <button id="bt4" value="4" onclick="NumberFour()">4</button>
+				           <button id="bt5" value="5" onclick="NumberFive()">5</button>
+				           <button id="bt6" value="6" onclick="NumberSix()">6</button>
+					  </div>
+					  <div id="btgroup3">
+					       <button id="bt7" value="7" onclick="NumberSeven()">7</button>
+				           <button id="bt8" value="8" onclick="NumberEight()">8</button>
+				           <button id="bt9" value="9" onclick="NumberNine()">9</button>
+					  </div>
+					  <div id="btgroup4">
+				          <button id="btsum" value="+" onclick="addition()">+</button>
+				          <button id="btsub" value="-"  onclick="subtraction()">-</button>
+				          <button id="btmult" value="x" onclick="multiplication()">X</button>
+					  </div>
+					  <div id="btgroup5">
+					      <button id="btdiv" value="/" onclick="division()">/</button>
+					      <button id="bt0"  value="0" onclick="NumberZero()">0</button>
+					      <button id="ce"   value="cancel" onclick="Eraser()">CE</button>
+						  <button id="equal" value="="  onclick="Calculation()">=</button>
+					  </div>
+                      <button id="equal2" value="="  onclick="Calculation()">=</button>					  
+			</div>
+			
+			<script>
+			        //Variáveis globais do programa.
+					
+					var datas = [];//Vetor que receberá os algarismos para a operação em forma de string.
+					var operation = [];//Vetor que receberá a quantidade de operações existentes no cálculo.
+					var Number = [""];//Vetor que receberá os números que foram armazenados no vetor datas.
+					var FinalResult;// Recebe o valor final do vetor Number.
+					var clear = 0;//Serve para controlar os trechos de código que limpam os dados na tela.
+					var control = 0;//
+					var conderaser = document.getElementById("ce");
+
+					
+					//Função  que insere o número um na tela e no vetor datas.
+					function NumberOne(){
+					 
+					    var one = "1";
+						
+						if(clear>0){
+						  document.getElementById("screen").innerHTML ="";
+						  document.getElementById("screen").innerHTML += one;
+						  datas.push(one);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  clear=0;
+						  control = 1;
+						}
+						else{
+					      document.getElementById("screen").innerHTML += one;
+						  datas.push(one);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  control = 1;
+						}
+						Blink();
+					}
+					//Função  que insere o número dois na screen e  no vetor datas.
+					 function NumberTwo(){
+					    
+						var two = "2";
+						
+						if(clear>0){
+						  document.getElementById("screen").innerHTML ="";
+						  document.getElementById("screen").innerHTML += two;
+						  datas.push(two);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  clear=0;
+						  control = 1;
+						}
+						else{
+					      document.getElementById("screen").innerHTML += two;
+						  datas.push(two);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  control = 1;
+						}
+					    Blink();
+					 }
+					 //Função  que insere o número três na screen e no vetor datas.
+					 function NumberThree(){
+					    
+						var three = "3";
+						
+						if(clear>0){
+						  document.getElementById("screen").innerHTML ="";
+						  document.getElementById("screen").innerHTML += three;
+						  datas.push(three);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  clear=0;
+						  control = 1;
+						}
+						else{
+					      document.getElementById("screen").innerHTML += three;
+						  datas.push(three);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  control = 1;
+						}
+						Blink();
+					}
+					//Função  que insere o número quatro na screen e no vetor datas.
+					function NumberFour(){
+					    
+						var four = "4";
+						
+						if(clear>0){
+						  document.getElementById("screen").innerHTML ="";
+						  document.getElementById("screen").innerHTML += four;
+						  datas.push(four);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  clear=0;
+						  control = 1;
+						}
+						else{
+					      document.getElementById("screen").innerHTML += four;
+						  datas.push(four);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  control = 1;
+						}
+						Blink();
+					}
+					//Função  que insere o número cinco na screen e no vetor datas.
+					function NumberFive(){
+					    
+						var five = "5";
+						
+						if(clear>0){
+						  document.getElementById("screen").innerHTML ="";
+						  document.getElementById("screen").innerHTML += five;
+						  datas.push(five);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  clear=0;
+						  control = 1;
+						}
+						else{
+					      document.getElementById("screen").innerHTML += five;
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  datas.push(five);
+						  control = 1;
+						}
+						Blink();
+					}
+					//Função  que insere o número seis na tela e no vetor datas.
+					function NumberSix(){
+					    
+						var six = "6";
+						
+						if(clear>0){
+						  document.getElementById("screen").innerHTML ="";
+						  document.getElementById("screen").innerHTML += six;
+						  datas.push(six);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  clear=0;
+						  control = 1;
+						}
+						else{
+					      document.getElementById("screen").innerHTML += six;
+						  datas.push(six);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  control = 1;
+						}
+						Blink();
+					}
+					//Função  que insere o número sete na tela e no vetor datas.
+					function NumberSeven(){
+					    
+						var seven = "7";
+						
+						if(clear>0){
+						  document.getElementById("screen").innerHTML ="";
+						  document.getElementById("screen").innerHTML += seven;
+						  datas.push(seven);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  clear=0;
+						  control = 1;
+						}
+						else{
+					      document.getElementById("screen").innerHTML += seven;
+						  datas.push(seven);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  control = 1;
+						}
+						Blink();
+					}
+					//Função  que insere o número oito na screen e no vetor datas.
+					function NumberEight(){
+					    
+						var eight = "8";
+						
+						if(clear>0){
+						  document.getElementById("screen").innerHTML ="";
+						  document.getElementById("screen").innerHTML += eight;
+						  datas.push(eight);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  clear=0;
+						  control = 1;
+						}
+						else{
+					      document.getElementById("screen").innerHTML += eight;
+						  datas.push(eight);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  control = 1;
+						}
+						Blink();
+					}
+					//Função  que insere o número nove na screen e no vetor datas.
+					function NumberNine(){
+					    
+						var nine = "9";
+						
+						if(clear>0){
+						  document.getElementById("screen").innerHTML ="";
+						  document.getElementById("screen").innerHTML += nine;
+						  datas.push(nine);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  clear=0;
+						  control = 1;
+						}
+						else{
+					      document.getElementById("screen").innerHTML += nine;
+						  datas.push(nine);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  control = 1;
+						}
+						Blink();
+					}
+					//Função  que insere o número zero na screen e no vetor datas.
+					function NumberZero(){
+					    
+						var zero = "0";
+						
+						if(clear>0){
+						  document.getElementById("screen").innerHTML ="";
+						  document.getElementById("screen").innerHTML += zero;
+						  datas.push(zero);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  clear=0;
+						  control = 1;
+						}
+						else{
+					      document.getElementById("screen").innerHTML += zero;
+						  datas.push(zero);
+						  conderaser.value="cancel";
+						  conderaser.innerHTML = "CE";
+						  control = 1;
+						}
+						Blink();
+					}
+					//Função  que insere o símbolo da operação de adição na screen e no vetor datas.
+					function addition(){
+					    
+						var sum = "+";
+						
+						if (control>0){
+						  if(clear>0){
+						     Number[0] = FinalResult;
+						     document.getElementById("screen").innerHTML += sum;
+						     datas.push(sum);
+							 document.getElementById("ce").innerHTML = "CE";
+						     conderaser.value = "cancel";
+						     clear=0;
+							 control=0;
+						}
+						  else{
+						     document.getElementById("screen").innerHTML += sum;
+						     datas.push(sum);
+							 document.getElementById("ce").innerHTML = "CE";
+						     conderaser.value = "cancel";
+						     clear=0;
+							 control=0;
+						}
+					  }
+					  Blink();
+					}
+					//Função  que insere o símbolo da operação de subtração na screen e no vetor datas.
+					function subtraction(){
+					    
+						var sub = "-";
+						
+						if (control>0){
+						  if(clear>0){
+						     Number[0] = FinalResult;
+						     document.getElementById("screen").innerHTML += sub;
+							 document.getElementById("ce").innerHTML = "CE";
+						     conderaser.value = "cancel";
+						     datas.push(sub);
+						     clear=0;
+							 control=0;
+						}
+						  else{
+						    document.getElementById("screen").innerHTML += sub;
+						    datas.push(sub);
+							document.getElementById("ce").innerHTML = "CE";
+						    conderaser.value = "cancel";
+						    clear=0;
+							control=0;
+						}
+					  }
+					  Blink();
+					}
+					//Função  que insere o símbolo da operação de multiplicação na screen e no vetor datas.
+					function multiplication(){
+					    
+						var mult = "x";
+						
+						if (control>0){
+						  if(clear>0){
+						     Number[0] = FinalResult;
+						     document.getElementById("screen").innerHTML += mult;
+						     datas.push(mult);
+							 document.getElementById("ce").innerHTML = "CE";
+						     conderaser.value = "cancel";
+						     clear=0;
+							 control=0;
+						}
+						  else{
+						    document.getElementById("screen").innerHTML += mult;
+						    datas.push(mult);
+							document.getElementById("ce").innerHTML = "CE";
+						    conderaser.value = "cancel";
+						    clear=0;
+							control=0;
+						}
+					  }
+					  Blink();
+					}
+					//Função  que insere o símbolo da operação de divisão na screen e no vetor datas. 
+					function division(){
+					    
+						var div = "/";
+						
+						if (control>0){
+						  if(clear>0){
+						     Number[0] = FinalResult;
+						     document.getElementById("screen").innerHTML += div;
+						     datas.push(div);
+							 document.getElementById("ce").innerHTML = "CE";
+						     conderaser.value = "cancel";
+						     clear=0;
+							 control=0;
+						}
+						  else{
+						    document.getElementById("screen").innerHTML += div;
+						    datas.push(div);
+							document.getElementById("ce").innerHTML = "CE";
+						    conderaser.value = "cancel";
+						    clear=0;
+							control=0;
+						}
+					  }
+					  Blink();
+					}
+					
+					//Função que serve para limpar os dados do  vetor datas.
+				    function ClearDatas(){
+				       var tam = datas.length;
+					   for(var o=0;o<=tam;o++){
+					      datas.shift();
+					   }
+				    }
+				    //Função que serve para limpar o vetor Number.
+				    function ClearNumber(){
+				      var tam = Number.length;
+					  for(var o=0;o<=tam;o++){
+					    Number.shift();
+					  }
+					  Number = [""];
+				    }
+				   //Função que serve para limpar o vetor operation.
+				   function ClearOperation(){
+				     var tam = operation.length;
+					 for(var o=0;o<=tam;o++){
+					   operation.shift();
+					}
+				   }
+				   //Função responsavél pelo pisco da borda da  screen da calculator.
+				   function Blink(){
+				     var border = document.getElementById("screen");
+					 border.style.borderColor = "#0000ff";
+					 setTimeout(RemoveBlink,1000/3);
+				   }
+				   //Função responsavél pelo pisco da borda da  screen da calculator.
+				   function RemoveBlink(){
+				     var border = document.getElementById("screen");
+					 border.style.borderColor = "#000000";
+				   }
+				   
+				   //Função responsavél por apagar valores inseridos errado pelo usuário.
+				   function Eraser(){
+					 var era;
+					 var capture,capture2;
+					 control = 1;
+					 
+					 if(conderaser.value == "cancel"){
+					      era = datas.length - 1;
+					      datas.splice(era,1);
+					      capture = document.getElementById("screen").innerHTML;
+				          capture2 = capture.substr(0,capture.length-1);
+					      document.getElementById("screen").innerHTML = capture2;
+					   }
+					 else{
+					      Number.push("");
+					      document.getElementById("screen").innerHTML = "";
+						  document.getElementById("ce").innerHTML = "CE";
+						  conderaser.value = "cancel";
+					  }
+					}
+					
+					function Clear(){
+					  conderaser.innerHTML = "AC";
+					  conderaser.value = "ac";
+					}
+					
+					//Essa é a função principal do programa.
+					function Calculation(){
+					 
+					 var n = 0;//variavél de controle de posições no vetor Número.
+					 var op = 0;//variavél de controle de posições no calculo.
+					 var op2 = 1;//variavel de controle de posições no calculo.
+					 var resultado = 0;//variável que armazena a quantidade de vezes que um símbolo aritmérico apareceu no vetor operation.
+					 var condition = 0;//Algumas condições precisam ser atendidas para para o calculo ser realizado,como por exemplo ter algarismos para operação.
+					 var last = datas.length-1;
+					 
+					 /*Condições para o cálculo ser realizado.
+					  *1 - O vetor Number não pode está vazio.
+					  *2 - A última posição do vetor não pode ser um sinal aritmético.
+					  *3 - É necessário 2 algarismos para que o cálculo seja realizado.
+					  */
+					 if(datas.length!=0){
+					    condition++;
+					 }
+					 if((datas[last] != "+")&&(datas[last] != "-")&&(datas[last] != "x")&&(datas[last] != "/")&&(datas[last] != "")){
+					    condition++;
+					 }
+					 if(condition == 2 ){
+					    for(var h=0;h<datas.length;h++){
+						  if((datas[h]== "+")||(datas[h]== "-")||(datas[h]== "x")||(datas[h]== "/" )){
+						     if((datas[h+1]!="+")||(datas[h+1]!="-")||(datas[h+1]!="x")||(datas[h+1]!="-")){
+							    condition++;
+								break;
+							 }
+						  }
+						}
+					 }
+					 
+					 if(condition == 3){
+					/*Esse for é responsável pelo preenchimento do vetor Number com os valores que serão calculados
+					 *cada posição desse vetor receberá um número.
+					 */
+					    for(var i=0;i<datas.length;i++){
+					 
+					       if((datas[i]!="+")&&(datas[i]!="-")&&(datas[i]!="x")&&(datas[i]!="/")){
+					          Number[n] = Number[n]+datas[i];
+					       }
+					       else{
+					         n++;
+						     operation.push(datas[i]);
+						     Number[n]="";//Preenche o próximo campo do vetor Number com uma string.
+					      }
+                       }
+					
+					/* Nesse trecho do código os datas do vetor número são convertidos do tipo string para númerico*/
+					
+					   for(var j=0;j<Number.length;j++){
+					       Number[j] = parseInt(Number[j]);
+					   }
+					
+					/* A partir daqui começa os calculos*/
+					
+					/*Irei dividir as operações em duas partes a primeira irá tratar do cálculo com operações iguais.
+					 *Exemplo : 2x2x2x2x2x2.
+					 *Já a segunda etapa irá trabalhar com o cálculo com operações diferentes.
+					 *Exemplo : 2+2+3-1+4x10+50/2
+					 */
+					 
+					 /*Aqui começa a primeira etapa do processo*/
+					    
+					 /*Primeiro vamos descobrir se todas as operações são iguais
+					  *O código abaixo serve para verificar se todas as operações são iguais
+					  */
+					  var equal = 0;
+					  
+					  if(operation[0]=="x"){
+						  for(var k=0;k<=operation.length;k++){
+						   if(operation[k]=="x"){
+						     equal++;
+						    }
+						   else{
+						     break;
+						    }
+						 }
+					  }
+					  else if(operation[0]=="/"){
+						  for(var k=0;k<=operation.length;k++){
+						   if(operation[k]=="/"){
+						     equal++;
+						    }
+						   else{
+						     break;
+						    }
+						 }
+					 }
+					  else if(operation[0]=="+"){
+						  for(var k=0;k<=operation.length;k++){
+						   if(operation[k]=="+"){
+						     equal++;
+						    }
+						   else{
+						     break;
+						    }
+						 }
+					 }
+					  else if(operation[0]=="-"){
+						  for(var k=0;k<=operation.length;k++){
+						   if(operation[k]=="-"){
+						     equal++;
+						    }
+						   else{
+						     break;
+						    }
+						 }
+					 }
+					  //Aqui termina a verificação//
+					 /*
+					  *Nesse trecho começa as operações matemáticas, se todas as operações são iguais
+					  *as instruções dentro do  if são executadas senão as operações dentro do else são 
+					  * executadas.
+					  */
+					  
+				     if(equal == operation.length){
+					     if(operation[0]=="x"){
+					        for(var l=0;l<operation.length;l++){
+					         Number[op] = Number[op]*Number[op2];
+						     Number.splice(op2,1);
+					        }
+						}
+					     else if(operation[0]=="/"){
+						    for(var l=0;l<operation.length;l++){
+					         Number[op] = Number[op]/Number[op2];
+						     Number.splice(op2,1);
+						    }
+						}
+						else if(operation[0]=="+"){
+						    for(var l=0;l<operation.length;l++){
+					         Number[op] = Number[op]+Number[op2];
+						     Number.splice(op2,1);
+						    }
+						}
+						else if(operation[0]=="-"){
+						    for(var l=0;l<operation.length;l++){
+					        Number[op] = Number[op]-Number[op2];
+						    Number.splice(op2,1);
+						   }
+					    }
+					    FinalResult = Number[0];
+					    document.getElementById("screen").innerHTML = FinalResult;
+					    clear = 1;
+					/*Aqui termina a primeira etapa do processo*/
+					
+					/*Aqui começa a segunda etapa do processo*/
+				    }else{
+				        for(var m=0;m<operation.length;m++){
+					       if(operation[m]=="x"){
+						      Number[op] = Number[op]*Number[op+1];
+							  Number.splice(op+1,1);
+						   }
+						   else if(operation[m]=="/"){
+						     Number[op] = Number[op]/Number[op+1];
+							 Number.splice(op+1,1);
+						  }
+						   else{
+						    op++;
+						  }
+					   }
+					   op=0;
+					   for(var n=0;n<operation.length;n++){
+					     if(operation[n]=="+"){
+						    Number[op] = Number[op]+Number[op2];
+							Number.splice(op+1,1);
+						 }
+						 else if(operation[n]=="-"){
+						    Number[op] = Number[op]-Number[op2];
+							Number.splice(op+1,1);
+						 }
+					   }
+					   FinalResult = Number[0];
+					   document.getElementById("screen").innerHTML = FinalResult;
+					   clear = 1;
+				    }
+				    ClearDatas();
+			        ClearNumber();
+				    ClearOperation();
+					Clear();
+				 }
+				}
+				  
+		    </script>
+	  
+	  
+	  </body>
+	  
+	  
+</html>
